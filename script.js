@@ -15,3 +15,23 @@
 // api.openweathermap.org/data/2.5/weather?q=Columbus,Ohio&appid=79d6c8a5c213ee81a3e63617ff2d8e9d
 // api.openweathermap.org/data/2.5/weather?q=Columbus,Ohio&units=imperial&appid=79d6c8a5c213ee81a3e63617ff2d8e9d
 
+
+var searchWeather = function (cityState) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityState + "&units=imperial&appid=79d6c8a5c213ee81a3e63617ff2d8e9d";
+    $.ajax({url: queryURL, method: "GET"
+    }).done(function (weatherData) {
+        console.log(queryURL);
+        console.log(weatherData);
+    });
+}
+
+console.log(searchWeather("Columbus,Ohio"));
+// var temp = searchWeather("Columbus,Ohio").weatherData.main.temp;
+// console.log(temp);
+
+// var cloudLevel = searchWeather("Columbus,Ohio");
+// console.log(cloudLevel);
+
+searchWeather("Columbus,Ohio");
+
+
