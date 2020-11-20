@@ -14,24 +14,59 @@
 
 // api.openweathermap.org/data/2.5/weather?q=Columbus,Ohio&appid=79d6c8a5c213ee81a3e63617ff2d8e9d
 // api.openweathermap.org/data/2.5/weather?q=Columbus,Ohio&units=imperial&appid=79d6c8a5c213ee81a3e63617ff2d8e9d
+const t = moment();
+
+var forecastArr = [{
+    "date" : "",
+    "icon" : "",
+    "forecastTemp" : 0,
+    "forecastHumidity" : 0   
+}];
+
+console.log(forecastArr);
 
 
-var searchWeather = function (cityState) {
+var searchCurrentWeather = function (cityState) {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityState + "&units=imperial&appid=79d6c8a5c213ee81a3e63617ff2d8e9d";
-    $.ajax({url: queryURL, method: "GET"
-    }).done(function (weatherData) {
+    $.ajax({
+        url: queryURL, method: "GET"
+    }).then(function (weatherData) {
+        //testing
         console.log(queryURL);
         console.log(weatherData);
+        console.log(weatherData.main.temp);
+
+        $("#cityDateWI").text(weatherData.name + t.format(" MM/DD/YYYY"));
+        $("#temp").append(" " + weatherData.main.temp + "°F");
+        $("#humid").append(" " + weatherData.main.humidity + "%");
+        $("#windSpeed").append(" " + weatherData.wind.speed + " MPH");
+
+
+
     });
 }
 
-console.log(searchWeather("Columbus,Ohio"));
-// var temp = searchWeather("Columbus,Ohio").weatherData.main.temp;
-// console.log(temp);
+var search5DayWeather = function (cityState) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityState + "&cnt=6&units=imperial&appid=79d6c8a5c213ee81a3e63617ff2d8e9d";
+    $.ajax({
+        url: queryURL, method: "GET"
+    }).then(function (forecast) {
+        //testing
+        console.log(forecast.list[0].main.temp);
+        for(i=1; i< 6; i++) {
+          
+          console.log(forecast.list[i].main.temp);
+          console.log(forecast.list[i].dt_txt);
+          $("#card-temp" + i).append(" " + forecast.list[i].main.temp + " °F");
+          $("#card-humid" + i).append(" " + forecast.list[i].main.humidity + "%");
+        }
 
-// var cloudLevel = searchWeather("Columbus,Ohio");
-// console.log(cloudLevel);
 
-searchWeather("Columbus,Ohio");
+
+    });
+}
+
+searchCurrentWeather("Columbus,Ohio");
+search5DayWeather("Columbus,Ohio");
 
 
