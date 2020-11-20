@@ -15,58 +15,55 @@
 // api.openweathermap.org/data/2.5/weather?q=Columbus,Ohio&appid=79d6c8a5c213ee81a3e63617ff2d8e9d
 // api.openweathermap.org/data/2.5/weather?q=Columbus,Ohio&units=imperial&appid=79d6c8a5c213ee81a3e63617ff2d8e9d
 const t = moment();
+var apiKey = "&appid=79d6c8a5c213ee81a3e63617ff2d8e9d";
 
-var forecastArr = [{
-    "date" : "",
-    "icon" : "",
-    "forecastTemp" : 0,
-    "forecastHumidity" : 0   
-}];
+var forecastArr = [];
 
 console.log(forecastArr);
 
 
-var searchCurrentWeather = function (cityState) {
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityState + "&units=imperial&appid=79d6c8a5c213ee81a3e63617ff2d8e9d";
+
+
+var cityWeatherData = function (cityState) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityState + "&units=imperial" + apiKey;
+    console.log(queryURL);
     $.ajax({
         url: queryURL, method: "GET"
     }).then(function (weatherData) {
-        //testing
-        console.log(queryURL);
-        console.log(weatherData);
-        console.log(weatherData.main.temp);
 
         $("#cityDateWI").text(weatherData.name + t.format(" MM/DD/YYYY"));
         $("#temp").append(" " + weatherData.main.temp + "°F");
         $("#humid").append(" " + weatherData.main.humidity + "%");
         $("#windSpeed").append(" " + weatherData.wind.speed + " MPH");
 
+        // 5 day forecast
+        var lat = weatherData.coord.lat;
+        var lon = weatherData.coord.lon;
+        var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&units=imperial" + apiKey;
+        console.log(queryURL);
 
+        $.ajax({
+            url: queryURL, method: "GET"
+        }).then(function (forecast) {
 
-    });
+            //add UV data to current weather, not included in first api call
+            $("#uv").append(" " + forecast.current.uvi);
+
+            var count5Day = 5;
+            console.log(forecast.daily[0].temp.day);
+            for (i = 0; i <= count5Day; i++) {
+
+                $("#card-date" + i).append(moment.unix(forecast.daily[i].dt).format("MM/DD/YYYY"));
+                $("#card-temp" + i).append(" " + forecast.daily[i].temp.day + " °F");
+                $("#card-humid" + i).append(" " + forecast.daily[i].humidity + "%");
+            }
+
+        });
+
+    }); //first ajax end tag
 }
 
-var search5DayWeather = function (cityState) {
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityState + "&cnt=6&units=imperial&appid=79d6c8a5c213ee81a3e63617ff2d8e9d";
-    $.ajax({
-        url: queryURL, method: "GET"
-    }).then(function (forecast) {
-        //testing
-        console.log(forecast.list[0].main.temp);
-        for(i=1; i< 6; i++) {
-          
-          console.log(forecast.list[i].main.temp);
-          console.log(forecast.list[i].dt_txt);
-          $("#card-temp" + i).append(" " + forecast.list[i].main.temp + " °F");
-          $("#card-humid" + i).append(" " + forecast.list[i].main.humidity + "%");
-        }
+cityWeatherData("Columbus,Ohio");
 
-
-
-    });
-}
-
-searchCurrentWeather("Columbus,Ohio");
-search5DayWeather("Columbus,Ohio");
 
 
