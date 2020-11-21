@@ -12,16 +12,16 @@
 
 <body>
     <!--Header-->
-    <header class="jumbotron text-center">Weather Dashboard</header>
+    <header class="jumbotron text-center"><span id="headerText">Weather Dashboard</span></header>
 
     <div class="container">
         <div class="row">
             <!--City Search Bar with search history-->
-            <aside class="col-3 my-3 p-5 rounded border border-dark">
+            <aside class="col-3 my-3 p-5 rounded border border-dark bg-dark">
                 <label for="searchInput"><strong>Search for a city (City, State):</strong></label>
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="searchInput" placeholder="">
+                    <input type="text" class="form-control" id="searchInput">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
                     </div>
@@ -29,13 +29,10 @@
 
                 <!--City History Button List-->
                 <div class="searchHistBtnList">
-                    <!-- <button class= "pr-5">Test City</button>
-                    <br>
-                    <button class= "pr-5">Test City</button> -->
                 </div>
             </aside>
 
-            <section class="col-9 my-3 p-5 rounded border border-dark">
+            <section class="col-9 my-3 p-5 rounded border border-dark bg-secondary text-dark">
 
                 <div class="row">
                     <!--Searched city's current weather data-->
@@ -51,49 +48,54 @@
                 <hr>
 
                 <!--Searched city's 5-day weather data-->
-                <label id="card"><strong>5-Day Forecast:</strong></label>
+                <label id="card" class="text-white"><strong>5-Day Forecast:</strong></label>
                 <div class="row">
 
-                    <div class="col mx-1 card text-nowrap text-center" style="width: 18rem;">
+                    <div class="mx-1 card text-left bg-primary text-white">
                         <div class="Day1 card-body">
                             <h6 id="card-date1"></h6>
                             <!--Weather Status Icon-->
+                            <a id="iconImg1"></a>
                             <p id="card-temp1">Temp:</p>
                             <p id="card-humid1">Humidity:</p>
                         </div>
                     </div>
 
-                    <div class="col mx-1 card text-nowrap text-center" style="width: 18rem;">
+                    <div class="mx-1 card text-left bg-primary text-white">
                         <div class="Day2 card-body">
                             <h6 id="card-date2"></h6>
                             <!--Weather Status Icon-->
+                            <a id="iconImg2"></a>
                             <p id="card-temp2">Temp:</p>
                             <p id="card-humid2">Humidity:</p>
                         </div>
                     </div>
 
-                    <div class="col mx-1 card text-nowrap text-center" style="width: 18rem;">
+                    <div class="mx-1 card text-left bg-primary text-white">
                         <div class="Day3 card-body">
                             <h6 id="card-date3"></h6>
                             <!--Weather Status Icon-->
+                            <a id="iconImg3"></a>
                             <p id="card-temp3">Temp:</p>
                             <p id="card-humid3">Humidity:</p>
                         </div>
                     </div>
 
-                    <div class="col mx-1 card text-nowrap text-center" style="width: 18rem;">
+                    <div class="mx-1 card text-left bg-primary text-white">
                         <div class="Day4 card-body">
                             <h6 id="card-date4"></h6>
                             <!--Weather Status Icon-->
+                            <a id="iconImg4"></a>
                             <p id="card-temp4">Temp:</p>
                             <p id="card-humid4">Humidity:</p>
                         </div>
                     </div>
 
-                    <div class="col mx-1 card text-nowrap text-center" style="width: 18rem;">
+                    <div class="mx-1 card text-left bg-primary text-white">
                         <div class="Day5 card-body">
                             <h6 id="card-date5"></h6>
                             <!--Weather Status Icon-->
+                            <a id="iconImg5"></a>
                             <p id="card-temp5">Temp:</p>
                             <p id="card-humid5">Humidity:</p>
                         </div>
@@ -103,8 +105,6 @@
             </section>
         </div>
     </div>
-
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
