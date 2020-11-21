@@ -1,7 +1,11 @@
+
+/*increase header font size*/
+
 #headerText {
     font-size: 50px;
 }
 
+/*background color classes for UV index*/
 
 .bg-green {
     background-color: green;
