@@ -12,7 +12,13 @@ $("#searchButton").click(function (event) {
     cityWeatherData(userCity);
     localStorage.setItem(storageIndex, userCity);
     storageIndex++;
+    //$("input").val("");
+})
 
+$("#clearButton").click(function () {
+    localStorage.clear();
+    location.reload();
+    
 })
 
 // Button listener for previous search inquiries
@@ -52,6 +58,7 @@ function renderStoredBtns() {
 }
 
 // Main ajax function, pulls current day weather data, and contains coord data required for nested ajax
+// Replaces text on the page with api weather data
 function cityWeatherData(cityState) {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityState + "&units=imperial" + apiKey;
     $.ajax({
@@ -75,9 +82,10 @@ function cityWeatherData(cityState) {
             var searchedCityBtn = $('<button type="button" class="btn btn-secondary" id=' + btnIndex + '></button><br><br>').text(weatherData.name);
             $(".searchHistBtnList").append(searchedCityBtn);
             btnIndex++;
+            
 
         }
-
+        
         // 5 day forecast
         var lat = weatherData.coord.lat;
         var lon = weatherData.coord.lon;
