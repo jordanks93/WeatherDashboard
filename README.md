@@ -31,7 +31,7 @@ A weather dashboard that will run in the browser and feature dynamically updated
 
 ## Visual:
 
-[Demo Image](./images/weatherDash.JPG)
+![Demo Image](./images/weatherDash.JPG)
 
 [Gitpages Link](https://jordanks93.github.io/WeatherDashboard/)
 
