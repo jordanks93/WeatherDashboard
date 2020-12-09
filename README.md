@@ -36,7 +36,7 @@ A weather dashboard that will run in the browser and feature dynamically updated
 [Gitpages Link](https://jordanks93.github.io/WeatherDashboard/)
 
 ## Author: 
-Jordan Stuckman
+Jordan Stuckman - jordanks93@gmail.com
 
 ## License:
 [MIT](./license/license.txt)
