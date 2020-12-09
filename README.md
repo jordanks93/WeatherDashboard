@@ -37,3 +37,6 @@ A weather dashboard that will run in the browser and feature dynamically updated
 
 ## Author: 
 Jordan Stuckman
+
+## License:
+[MIT](./license/license.txt)
